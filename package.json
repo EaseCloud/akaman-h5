@@ -1,0 +1,17 @@
+{
+  "name": "akaman",
+  "version": "1.0.0",
+  "description": "Akaman h5 Frontend",
+  "author": "fish-ball",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "nuxt": "^2.0.0"
+  },
+  "devDependencies": {}
+}
