@@ -1,55 +1,44 @@
 <template>
   <div>
     <nuxt />
+    <div id="screen-ruler"></div>
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+<script>
+export default {
+  mounted () {
+    // 精确控制 html 的 fontSize 为 5vw
+    let fullWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    let $html = document.body.parentElement
+    let fontSize = fullWidth / 20
+    $html.style.fontSize = `${fontSize}px`
+    const $ruler = document.getElementById('screen-ruler')
+    const adjustScale = function () {
+      const gap = fullWidth - $ruler.offsetWidth
+      if (gap < -0.01 || gap > 0.01) {
+        fontSize *= 1 + gap / fullWidth
+        $html.style.fontSize = `${fontSize}px`
+        setTimeout(adjustScale, 10)
+      } else {
+        $ruler.parentElement.removeChild($ruler)
+      }
+    }
+    adjustScale()
+  }
+}
+</script>
+
+<style scoped>
+#screen-ruler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20rem;
+  height: 1px;
+  background-color: blue;
+  border: 0;
   box-sizing: border-box;
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
+  /*opacity: 0;*/
 }
 </style>

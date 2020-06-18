@@ -1,4 +1,3 @@
-
 export default {
   mode: 'spa',
   /*
@@ -8,7 +7,10 @@ export default {
     title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, user-scalable=no, minimum-scale=1, maximum-scale=1'
+      },
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
@@ -23,22 +25,36 @@ export default {
   ** Global CSS
   */
   css: [
+    'reset-css/reset.css',
+    '~/assets/styles/style.less'
   ],
+  router: {
+    mode: 'hash'
+  },
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    '~/nuxt-mobile/index',
+    '~/plugins/mixins'
   ],
   /*
   ** Nuxt.js dev-modules
   */
-  buildModules: [
-  ],
+  buildModules: [],
   /*
   ** Nuxt.js modules
   */
   modules: [
+    'nuxt-fontawesome'
   ],
+  fontawesome: {
+    component: 'fa',
+    imports: [{
+      set: '@fortawesome/free-solid-svg-icons',
+      icons: ['fas']
+    }]
+  },
   /*
   ** Build configuration
   */
@@ -47,6 +63,13 @@ export default {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    },
+    loaders: {
+      less: {
+        lessOptions: {
+          javascriptEnabled: true
+        }
+      }
     }
   }
 }

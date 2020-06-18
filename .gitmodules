@@ -1,0 +1,4 @@
+[submodule "nuxt-mobile"]
+	path = nuxt-mobile
+	url = https://github.com/easecloud/nuxt-mobile.git
+	branch = master
